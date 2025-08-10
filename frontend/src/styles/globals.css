@@ -1,0 +1,13 @@
+body {
+  font-family: 'Inter', sans-serif;
+  background: linear-gradient(to bottom, #1a1a40, #4b0082);
+  color: #fff;
+}
+section {
+  padding: 4rem 1rem;
+}
+@media (max-width: 768px) {
+  h2 {
+    font-size: 2rem;
+  }
+}
