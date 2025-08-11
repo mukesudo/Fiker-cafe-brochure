@@ -4,17 +4,25 @@ import axios from 'axios';
 
 export default function Contact() {
   const [form, setForm] = useState({ name: '', email: '', message: '' });
+  const [error, setError] = useState<string | null>(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    await axios.post('http://localhost:3001/api/contact', form);
-    setForm({ name: '', email: '', message: '' });
-    alert('Message sent!');
+    try {
+      await axios.post('http://localhost:3001/api/contact', form);
+      setForm({ name: '', email: '', message: '' });
+      setError(null);
+      alert('Message sent!');
+    } catch (err) {
+      console.error('Axios error:', err);
+      setError('Failed to send message');
+    }
   };
 
   return (
-    <section id="contact" className="py-16 bg-indigo-600 text-white">
+    <section id="contact" className="py-16 bg-stardust text-white">
       <h2 className="text-4xl font-bold text-center mb-8">Contact Us</h2>
+      {error && <p className="text-red-500 text-center">{error}</p>}
       <motion.form
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}

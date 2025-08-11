@@ -6,7 +6,7 @@ export default function Hero() {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 1 }}
-      className="h-screen bg-gradient-to-r from-purple-600 to-indigo-600 flex items-center justify-center text-white"
+      className="h-screen bg-gradient-to-r from-cosmic to-stardust flex items-center justify-center text-white"
     >
       <div className="text-center">
         <h1 className="text-5xl font-bold">Fiker Cafe</h1>
