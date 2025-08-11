@@ -8,12 +8,14 @@ fastify.get('/api/menu', async () => {
   return prisma.menuItem.findMany();
 });
 
-fastify.post('/api/contact', async (request) => {
+fastify.post('/api/contact', async (request, reply) => {
   const { name, email, message } = request.body;
-  return prisma.contact.create({ data: { name, email, message } });
+  const contact = await prisma.contact.create({ data: { name, email, message } });
+  return reply.status(201).send(contact);
 });
 
 async function seed() {
+  await prisma.menuItem.deleteMany();
   await prisma.menuItem.createMany({
     data: [
       { name: 'Stellar Latte', description: 'A cosmic blend of espresso and milk', price: 4.99 },
@@ -23,7 +25,7 @@ async function seed() {
   });
 }
 
-fastify.listen({ port: 3001 }, async (err) => {
+fastify.listen({ port: 3001, host: '0.0.0.0' }, async (err) => {
   if (err) {
     fastify.log.error(err);
     process.exit(1);
