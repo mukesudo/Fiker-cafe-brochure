@@ -20,7 +20,7 @@ export default function Home() {
         <p className="max-w-2xl mx-auto text-gray-200 text-lg">
           A cozy Ethiopian cafe where the stars align with every sip. Enjoy traditional dishes, crafted with authentic spices and love.
         </p>
-        <Link href="#contact" className="mt-6 inline-block bg-yellow-500 text-black px-6 py-3 rounded">Contact Us</a>
+        <link href="#contact" className="mt-6 inline-block bg-yellow-500 text-black px-6 py-3 rounded">Contact Us</link>
       </section>
       <section id="location" className="py-16 bg-gray-100 text-center">
         <h2 className="text-4xl font-bold mb-6 text-cosmic">Visit Us</h2>
