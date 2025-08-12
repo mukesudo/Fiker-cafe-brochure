@@ -80,7 +80,12 @@ fastify.post('/api/contact', async (request, reply) => {
 });
 
 async function seed() {
-  await prisma.menuItem.deleteMany();
+  const menuItemCount = await prisma.menuItem.count();
+  
+  if (menuItemCount > 0){
+    await prisma.menuItem.deleteMany();
+  }
+
   await prisma.menuItem.createMany({
     data: [
       { name: 'Doro Wat', description: 'Traditional bone-in chicken stew slowly cooked in a rich, spicy berbere sauce served with a hard boiled egg', price: 18.00 },
