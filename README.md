@@ -63,6 +63,15 @@ A modern, responsive brochure website for Fiker Cafe, showcasing a traditional m
      - Environment Variable: `NEXT_PUBLIC_API_URL=https://cosmic-brew-backend.onrender.com`
 
 **Screenshots**
+<img width="1354" height="681" alt="Fiker-cafe-brochure" src="https://github.com/user-attachments/assets/a34f8e7d-d545-49b2-a680-921f8bc83a66" />
+<img width="1344" height="680" alt="Fiker-cafe-brochure-menu" src="https://github.com/user-attachments/assets/f8b40217-65ad-4640-b48e-e21eda392da0" />
+<img width="1350" height="659" alt="Fiker-cafe-brochure-about-us" src="https://github.com/user-attachments/assets/fa4f33c6-03b3-4929-a22b-a6167defee16" />
+<img width="1349" height="681" alt="Fiker-cafe-brochure-login" src="https://github.com/user-attachments/assets/036d29c9-023f-481d-8534-1b138d814a1f" />
+<img width="1347" height="682" alt="Fiker-cafe-brochure-admin-page" src="https://github.com/user-attachments/assets/10276c71-ff3a-43ee-81c1-81be92729db0" />
+<img width="1348" height="681" alt="Fiker-cafe-brochure-contact-us" src="https://github.com/user-attachments/assets/45c6d562-f713-4408-8735-5974a0955532" />
+
+**Contact**
+For inquiries, reach out via Upwork or <a href="https://github.com/mukesudo" Github/> .
 
 
 
