@@ -7,7 +7,7 @@ export default function Home() {
   return (
     <div>
       <Head>
-        <title>Cosmic Brew Cafe</title>
+        <title>Fiker Cafe</title>
         <meta name="description" content="A cozy cafe with stellar coffee and cosmic vibes" />
       </Head>
       <Hero />
