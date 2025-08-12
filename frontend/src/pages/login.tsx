@@ -1,25 +1,57 @@
 import { useState } from 'react';
 import { useRouter } from 'next/router';
 import { motion } from 'framer-motion';
+import { AxiosError } from 'axios';
 import { login } from '../lib/api';
+import Toast from '../components/Toast';
+
+
+interface ToastState {
+  message: string;
+  type: 'success' | 'error';
+}
+
+interface ApiError {
+  error: string;
+}
+
 
 export default function Login() {
   const [credentials, setCredentials] = useState({ username: '', password: '' });
   const [error, setError] = useState<string | null>(null);
+  const [toast, setToast] = useState<ToastState | null>(null);
   const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const res = await login(credentials);
-      localStorage.setItem('token', res.token);
-      router.push('/admin');
-    } catch (err: any) {
-      setError(err.response?.data?.error || 'Invalid credentials. Try admin/password.');
+      const { token } = await login(credentials);
+      localStorage.setItem('token', token);
+      setToast({ message: 'Login successful!', type: 'success' });
+      setTimeout(() => router.push('/admin'), 1000); // Delay for toast visibility
+    } catch (err: unknown) {
+      const errorMsg = err instanceof AxiosError && err.response?.data?.error 
+        ? err.response.data.error 
+        : 'Invalid credentials';
+      setError(errorMsg);
+      setToast({ message: errorMsg, type: 'error' });
     }
   };
 
+  const handleBack = () => {
+    router.push('/');
+  };
+
   return (
+  <>
+      {toast && (
+        <Toast
+          message={toast.message}
+          type={toast.type}
+          onClose={() => setToast(null)}
+        />
+      )}
+    
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
@@ -59,7 +91,16 @@ export default function Login() {
         >
           Login
         </motion.button>
+        <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            onClick={handleBack}
+            className="mt-4 w-full bg-gray-500 text-white px-4 py-3 rounded-lg hover:bg-gray-400 transition-colors"
+          >
+            Back to Home
+          </motion.button>
       </motion.form>
     </motion.div>
+    </>
   );
 }

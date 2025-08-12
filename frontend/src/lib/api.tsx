@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'https://cautious-telegram-7pjx99qq6prfq4r-3001.app.github.dev';
+const BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'https://cautious-telegram-7pjx99qq6prfq4r-3001.app.github.dev/';
 
 const api = axios.create({
   baseURL: BASE_URL,
@@ -9,7 +9,6 @@ const api = axios.create({
   },
 });
 
-// Add token to headers if available
 api.interceptors.request.use(config => {
   const token = localStorage.getItem('token');
   if (token) {

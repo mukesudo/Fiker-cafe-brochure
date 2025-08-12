@@ -1,7 +1,7 @@
 const fastify = require('fastify')({ logger: true });
 const { PrismaClient } = require('@prisma/client');
-const prisma = new PrismaClient();
 const jwt = require('jsonwebtoken');
+const prisma = new PrismaClient();
 
 fastify.register(require('@fastify/cors'), { 
   origin: '*',
@@ -9,9 +9,8 @@ fastify.register(require('@fastify/cors'), {
   allowedHeaders: ['Content-Type', 'Authorization']
 });
 
-const SECRET_KEY = 'your-secret-key'; // Replace with a secure key in production (e.g., env var)
+const SECRET_KEY = 'your-secret-key'; // Replace with env var in production
 
-// Middleware for auth
 const authenticate = async (request, reply) => {
   const token = request.headers.authorization?.split(' ')[1];
   if (!token) {
@@ -24,7 +23,6 @@ const authenticate = async (request, reply) => {
   }
 };
 
-// Login endpoint (simple, for demo; use secure auth in production)
 fastify.post('/api/login', async (request, reply) => {
   const { username, password } = request.body;
   if (username === 'admin' && password === 'password') {
@@ -47,17 +45,25 @@ fastify.post('/api/menu', { preHandler: authenticate }, async (request, reply) =
 fastify.put('/api/menu/:id', { preHandler: authenticate }, async (request, reply) => {
   const { id } = request.params;
   const { name, description, price } = request.body;
-  const updatedItem = await prisma.menuItem.update({
-    where: { id: parseInt(id) },
-    data: { name, description, price: parseFloat(price) },
-  });
-  return reply.send(updatedItem);
+  try {
+    const updatedItem = await prisma.menuItem.update({
+      where: { id: parseInt(id) },
+      data: { name, description, price: parseFloat(price) },
+    });
+    return reply.send(updatedItem);
+  } catch (err) {
+    return reply.status(404).send({ error: 'Menu item not found' });
+  }
 });
 
 fastify.delete('/api/menu/:id', { preHandler: authenticate }, async (request, reply) => {
   const { id } = request.params;
-  await prisma.menuItem.delete({ where: { id: parseInt(id) } });
-  return reply.status(204).send();
+  try {
+    await prisma.menuItem.delete({ where: { id: parseInt(id) } });
+    return reply.status(204).send();
+  } catch (err) {
+    return reply.status(404).send({ error: 'Menu item not found' });
+  }
 });
 
 fastify.post('/api/contact', async (request, reply) => {

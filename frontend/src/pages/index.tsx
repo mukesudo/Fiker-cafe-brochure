@@ -9,7 +9,7 @@ export default function Home() {
     <div>
       <Head>
         <title>Fiker Cafe</title>
-        <meta name="description" content="A cozy cafe with stellar coffee and cosmic vibes" />
+        <meta name="description" content="Savor authentic Ethiopian cuisine under the stars." />
         <link href="https://fonts.googleapis.com/css2?family=Inter&family=Poppins:wght@700&display=swap" rel="stylesheet" />
       </Head>
       <Nav />
@@ -18,7 +18,7 @@ export default function Home() {
       <section id="about" className="py-16 text-center bg-gradient-to-b from-cosmic to-gray-900">
         <h2 className="text-4xl font-bold mb-6 text-yellow-500">About Fiker Cafe</h2>
         <p className="max-w-2xl mx-auto text-gray-200 text-lg">
-          A cozy cafe where the stars align with every sip. Enjoy traditional foods and pastries in a galactic atmosphere, crafted with love and authentic spices.
+          A cozy Ethiopian cafe where the stars align with every sip. Enjoy traditional dishes, crafted with authentic spices and love.
         </p>
         <a href="#contact" className="mt-6 inline-block bg-yellow-500 text-black px-6 py-3 rounded">Contact Us</a>
       </section>

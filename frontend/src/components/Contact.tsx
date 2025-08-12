@@ -13,16 +13,16 @@ export default function Contact() {
       setForm({ name: '', email: '', message: '' });
       setError(null);
       alert('Message sent successfully!');
-    } catch (err: any) {
-      console.error('API error:', err.message);
-      setError('Failed to send message. Please try again later.');
+    } catch (err: unknown) {
+      const errorMsg = err instanceof Error ? err.message : 'Failed to send message';
+      setError(errorMsg);
     }
   };
 
   return (
     <section id="contact" className="py-16 bg-stardust text-white">
       <h2 className="text-4xl font-bold text-center mb-8">Contact Us</h2>
-      {error && <p className="text-red-500 text-center">{error}</p>}
+      {error && <p className="text-red-500 text-center mb-4">{error}</p>}
       <motion.form
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}

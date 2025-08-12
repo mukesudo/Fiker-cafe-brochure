@@ -1,7 +1,7 @@
 export default function Footer() {
   return (
     <footer className="py-6 bg-cosmic text-white text-center">
-      <p>&copy; 2025 Fiker Cafe. All rights reserved.</p>
+      <p>&copy; 2025 Cosmic Brew Cafe. All rights reserved.</p>
       <div className="mt-2 space-x-4">
         <a href="/menu" className="hover:text-nebula">Menu</a>
         <a href="/about" className="hover:text-nebula">About</a>
