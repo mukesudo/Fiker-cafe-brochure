@@ -15,6 +15,7 @@ export default function Nav() {
           <a href="#about" className="text-white hover:text-nebula">About</a>
           <a href="#location" className="text-white hover:text-nebula">Location</a>
           <a href="#contact" className="text-white hover:text-nebula">Contact</a>
+          <a href="/login" className="mt-6 inline-block bg-blue-500 text-white px-6 py-3 rounded">Login</a>
         </div>
       </div>
     </motion.nav>
