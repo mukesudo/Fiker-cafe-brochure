@@ -3,6 +3,7 @@ import Nav from '../components/Nav';
 import Hero from '../components/Hero';
 import Menu from '../components/Menu';
 import Contact from '../components/Contact';
+import Link from 'next/link';
 
 export default function Home() {
   return (
@@ -10,7 +11,7 @@ export default function Home() {
       <Head>
         <title>Fiker Cafe</title>
         <meta name="description" content="Savor authentic Ethiopian cuisine under the stars." />
-        <link href="https://fonts.googleapis.com/css2?family=Inter&family=Poppins:wght@700&display=swap" rel="stylesheet" />
+        <Link href="https://fonts.googleapis.com/css2?family=Inter&family=Poppins:wght@700&display=swap" rel="stylesheet" />
       </Head>
       <Nav />
       <Hero />
@@ -20,7 +21,7 @@ export default function Home() {
         <p className="max-w-2xl mx-auto text-gray-200 text-lg">
           A cozy Ethiopian cafe where the stars align with every sip. Enjoy traditional dishes, crafted with authentic spices and love.
         </p>
-        <link href="#contact" className="mt-6 inline-block bg-yellow-500 text-black px-6 py-3 rounded">Contact Us</link>
+        <Link href="#contact" className="mt-6 inline-block bg-yellow-500 text-black px-6 py-3 rounded">Contact Us</Link>
       </section>
       <section id="location" className="py-16 bg-gray-100 text-center">
         <h2 className="text-4xl font-bold mb-6 text-cosmic">Visit Us</h2>
