@@ -71,7 +71,7 @@ A modern, responsive brochure website for Fiker Cafe, showcasing a traditional m
 <img width="1348" height="681" alt="Fiker-cafe-brochure-contact-us" src="https://github.com/user-attachments/assets/45c6d562-f713-4408-8735-5974a0955532" />
 
 **Contact**
-For inquiries, reach out via <a href= "https://www.upwork.com/freelancers/~01b723e04027e66b7c?companyReference=1838525925384134219&mp_source=share">Upwork</a> or <a href="https://github.com/mukesudo">Github <a/> .
+   - For inquiries, reach out via **<a href= "https://www.upwork.com/freelancers/~01b723e04027e66b7c?companyReference=1838525925384134219&mp_source=share">Upwork</a>** or **<a href="https://github.com/mukesudo">Github <a/>** .
 
 
 
