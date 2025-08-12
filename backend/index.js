@@ -34,6 +34,28 @@ async function seed() {
   });
 }
 
+fastify.put('/api/menu/:id', async (request, reply) => {
+  const { id } = request.params;
+  const { name, description, price } = request.body;
+  const updatedItem = await prisma.menuItem.update({
+    where: { id: parseInt(id) },
+    data: { name, description, price },
+  });
+  return reply.send(updatedItem);
+});
+
+fastify.delete('/api/menu/:id', async (request, reply) => {
+  const { id } = request.params;
+  await prisma.menuItem.delete({ where: { id: parseInt(id) } });
+  return reply.status(204).send();
+});
+
+fastify.post('/api/menu', async (request, reply) => {
+  const { name, description, price } = request.body;
+  const newItem = await prisma.menuItem.create({ data: { name, description, price } });
+  return reply.status(201).send(newItem);
+});
+
 fastify.listen({ port: 3001, host: '0.0.0.0' }, async (err) => {
   if (err) {
     fastify.log.error(err);
