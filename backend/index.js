@@ -2,6 +2,7 @@ const fastify = require('fastify')({ logger: true });
 const { PrismaClient } = require('@prisma/client');
 const jwt = require('jsonwebtoken');
 const prisma = new PrismaClient();
+require('dotenv').config()
 
 fastify.register(require('@fastify/cors'), { 
   origin: '*',
@@ -9,7 +10,8 @@ fastify.register(require('@fastify/cors'), {
   allowedHeaders: ['Content-Type', 'Authorization']
 });
 
-const SECRET_KEY = 'your-secret-key'; // Replace with env var in production
+const SECRET_KEY = process.env.SECRET_KEY || 'default-secret-key';
+
 
 const authenticate = async (request, reply) => {
   const token = request.headers.authorization?.split(' ')[1];
