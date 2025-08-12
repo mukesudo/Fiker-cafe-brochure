@@ -18,9 +18,18 @@ async function seed() {
   await prisma.menuItem.deleteMany();
   await prisma.menuItem.createMany({
     data: [
-      { name: 'Stellar Latte', description: 'A cosmic blend of espresso and milk', price: 4.99 },
-      { name: 'Galactic Pastry', description: 'Flaky croissant with stardust glaze', price: 3.50 },
-      { name: 'Nebula Smoothie', description: 'Berry blast with a cosmic twist', price: 5.99 },
+      { name: 'Doro Wat', description: 'Traditional bone-in chicken stew slowly cooked in a rich, spicy berbere sauce served with a hard boiled egg', price: 18.00 },
+      { name: 'Misir Wat', description: 'Spicy red lentil stew seasoned with berbere spice, served vegan', price: 14.00 },
+      { name: 'Tibs', description: 'Pan-fried sliced beef or lamb with onions, peppers, and Ethiopian spices', price: 16.00 },
+      { name: 'Injera', description: 'Sour fermented flatbread made from teff flour, served as a base for all dishes', price: 5.00 },
+      { name: 'Shiro Wat', description: 'Chickpea stew cooked with onions, garlic, and berbere, vegan option', price: 13.00 },
+      { name: 'Key Wat', description: 'Spicy beef stew with berbere and butter, Ethiopian classic', price: 15.00 },
+      { name: 'Gomen be Siga', description: 'Collard greens cooked with meat, onions, and spices', price: 14.00 },
+      { name: 'Fuul', description: 'Stewed and spiced fava beans, served with injera', price: 12.00 },
+      { name: 'Salata', description: 'Fresh Ethiopian salad with tomatoes, onions, and peppers', price: 8.00 },
+      { name: 'Chechebsa', description: 'Torn flatbread mixed with butter and spices, breakfast favorite', price: 10.00 },
+      { name: 'Baked Tilapia', description: 'Whole tilapia baked with Ethiopian spices', price: 17.00 },
+      { name: 'Rice Dish', description: 'Simple rice with spices for children or light meals', price: 9.00 },
     ],
   });
 }
