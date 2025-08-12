@@ -1,17 +1,74 @@
 const fastify = require('fastify')({ logger: true });
 const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
+const jwt = require('jsonwebtoken');
 
-fastify.register(require('@fastify/cors'), { origin: '*' });
+fastify.register(require('@fastify/cors'), { 
+  origin: '*',
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+});
+
+const SECRET_KEY = 'your-secret-key'; // Replace with a secure key in production (e.g., env var)
+
+// Middleware for auth
+const authenticate = async (request, reply) => {
+  const token = request.headers.authorization?.split(' ')[1];
+  if (!token) {
+    return reply.status(401).send({ error: 'Unauthorized' });
+  }
+  try {
+    jwt.verify(token, SECRET_KEY);
+  } catch (err) {
+    return reply.status(401).send({ error: 'Invalid token' });
+  }
+};
+
+// Login endpoint (simple, for demo; use secure auth in production)
+fastify.post('/api/login', async (request, reply) => {
+  const { username, password } = request.body;
+  if (username === 'admin' && password === 'password') {
+    const token = jwt.sign({ user: 'admin' }, SECRET_KEY, { expiresIn: '1h' });
+    return { token };
+  }
+  return reply.status(401).send({ error: 'Invalid credentials' });
+});
 
 fastify.get('/api/menu', async () => {
   return prisma.menuItem.findMany();
 });
 
+fastify.post('/api/menu', { preHandler: authenticate }, async (request, reply) => {
+  const { name, description, price } = request.body;
+  const newItem = await prisma.menuItem.create({ data: { name, description, price: parseFloat(price) } });
+  return reply.status(201).send(newItem);
+});
+
+fastify.put('/api/menu/:id', { preHandler: authenticate }, async (request, reply) => {
+  const { id } = request.params;
+  const { name, description, price } = request.body;
+  const updatedItem = await prisma.menuItem.update({
+    where: { id: parseInt(id) },
+    data: { name, description, price: parseFloat(price) },
+  });
+  return reply.send(updatedItem);
+});
+
+fastify.delete('/api/menu/:id', { preHandler: authenticate }, async (request, reply) => {
+  const { id } = request.params;
+  await prisma.menuItem.delete({ where: { id: parseInt(id) } });
+  return reply.status(204).send();
+});
+
 fastify.post('/api/contact', async (request, reply) => {
-  const { name, email, message } = request.body;
-  const contact = await prisma.contact.create({ data: { name, email, message } });
-  return reply.status(201).send(contact);
+  try {
+    const { name, email, message } = request.body;
+    const contact = await prisma.contact.create({ data: { name, email, message } });
+    return reply.status(201).send(contact);
+  } catch (err) {
+    fastify.log.error(err);
+    return reply.status(500).send({ error: 'Failed to save contact' });
+  }
 });
 
 async function seed() {
@@ -33,28 +90,6 @@ async function seed() {
     ],
   });
 }
-
-fastify.put('/api/menu/:id', async (request, reply) => {
-  const { id } = request.params;
-  const { name, description, price } = request.body;
-  const updatedItem = await prisma.menuItem.update({
-    where: { id: parseInt(id) },
-    data: { name, description, price },
-  });
-  return reply.send(updatedItem);
-});
-
-fastify.delete('/api/menu/:id', async (request, reply) => {
-  const { id } = request.params;
-  await prisma.menuItem.delete({ where: { id: parseInt(id) } });
-  return reply.status(204).send();
-});
-
-fastify.post('/api/menu', async (request, reply) => {
-  const { name, description, price } = request.body;
-  const newItem = await prisma.menuItem.create({ data: { name, description, price } });
-  return reply.status(201).send(newItem);
-});
 
 fastify.listen({ port: 3001, host: '0.0.0.0' }, async (err) => {
   if (err) {
