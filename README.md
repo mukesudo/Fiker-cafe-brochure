@@ -53,14 +53,14 @@ A modern, responsive brochure website for Fiker Cafe, showcasing a traditional m
 - Manage menu items via `/admin` with add/edit/delete, toasts, and confirmations.
 
 **Deployment**
-   - **Backend**: Deployed on Render (`https://cosmic-brew-backend.onrender.com`).
+   - **Backend**: Deployed on Render (`https://fiker-cafe-backend.onrender.com`).
       - Build Command: `npm install && npx prisma migrate deploy`
       - Start Command: `node index.js`
       - Environment Variables: `DATABASE_URL`, `SECRET_KEY`
 
-   - **Frontend:** Deployed on Vercel (`https://cosmic-brew-brochure.vercel.app`).
+   - **Frontend:** Deployed on Vercel (`https://fiker-cafe.vercel.app`).
      - Framework Preset: Next.js
-     - Environment Variable: `NEXT_PUBLIC_API_URL=https://cosmic-brew-backend.onrender.com`
+     - Environment Variable: `NEXT_PUBLIC_API_URL=https://fiker-cafe-backend.onrender.com`
 
 **Screenshots**
 <img width="1354" height="681" alt="Fiker-cafe-brochure" src="https://github.com/user-attachments/assets/a34f8e7d-d545-49b2-a680-921f8bc83a66" />
